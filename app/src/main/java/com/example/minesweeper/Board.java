@@ -5,10 +5,10 @@ public class Board {
     private int num_rows;
     private int num_cols;
 
-    public Board(int num_rows, int num_cols, int proportion) {
+    public Board(int num_rows, int num_cols, int num_bombs) {
         this.num_rows = num_rows;
         this.num_cols = num_cols;
-        this.cellules = createBoard(this.num_rows, this.num_cols, proportion);
+        this.cellules = createBoard(this.num_rows, this.num_cols, num_bombs);
     }
 
     public int getRows(){
@@ -17,6 +17,10 @@ public class Board {
 
     public int getCols(){
         return num_cols;
+    }
+
+    public Cell[][] getCellules(){
+        return this.cellules;
     }
 
     public Cell getParticularCell(int row, int col){
@@ -55,20 +59,22 @@ public class Board {
         }
     }
 
-    public Cell[][] createBoard(int num_rows, int num_cols, int proportion) {
+    public Cell[][] createBoard(int num_rows, int num_cols, int num_bombs) {
         Cell[][] array = new Cell[num_rows][num_cols];
-        int num_nines = (int) (num_rows * num_cols * (proportion / 100.0)); // calcule le nombre d'éléments ayant pour valeur 9
 
         for (int i = 0; i < num_rows; i++) {
             for (int j = 0; j < num_cols; j++) {
-                if (num_nines > 0 && Math.random() < (proportion / 100.0)) {
-                    array[i][j] = new Cell(9);
-                    num_nines--;
-                } else {
-                    array[i][j] = new Cell(0);
-                }
+                array[i][j] = new Cell(0);
             }
         }
+
+        int indiceI, indiceJ = 0;
+        for (int i = 0; i < num_bombs; i++){
+            indiceI = (int) (Math.random() * num_rows);
+            indiceJ = (int) (Math.random() * num_cols);
+            array[indiceI][indiceJ] = new Cell(9);
+        }
+
         initBoards(array);
         return array;
     }

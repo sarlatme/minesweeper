@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_container"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/easy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facile"/>
+
+        <Button
+            android:id="@+id/medium_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moyen"/>
+
+        <Button
+            android:id="@+id/hard_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Difficile"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
