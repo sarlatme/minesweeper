@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class GameFragment extends Fragment {
     private Game game;
 
     private int row, col, bombs;
+    private String level;
     public GameFragment() {
     }
 
@@ -27,9 +29,10 @@ public class GameFragment extends Fragment {
             row = args.getInt("row");
             col = args.getInt("col");
             bombs = args.getInt("bombs");
+            level = args.getString("level");
         }
 
-        game = new Game(getContext(),row, col, bombs);
+        game = new Game(getContext(),row, col, bombs, level);
 
         displayBoardView(view);
 
@@ -40,6 +43,10 @@ public class GameFragment extends Fragment {
     private void displayBoardView(View view) {
         // Get the container for the board view
         LinearLayout boardContainer = view.findViewById(R.id.board_container);
+
+        TextView bomb_remaining = view.findViewById(R.id.bomb_remaining);
+        int bombs = this.game.getBombs();
+        bomb_remaining.setText("Nombre de bombes à trouver : " + bombs);
 
         // Add the ImageViews to the container
         int imageWidth = 100;

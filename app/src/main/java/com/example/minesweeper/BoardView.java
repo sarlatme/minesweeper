@@ -1,28 +1,65 @@
 package com.example.minesweeper;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.view.Gravity;
+import android.os.CountDownTimer;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class BoardView {
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
+
+public class BoardView extends AppCompatActivity {
 
     private Board board;
 
     private ImageView[][] boardView;
 
-    public BoardView(Board board, Context context){
+    private Context context;
+
+    private CountDownTimer countDownTimer;
+    public static long TIMER_LENGTH = 999000L;
+
+    private int mTime = 0;
+    private String level;
+
+    private TextView mTimerTextView;
+
+    public BoardView(Board board, Context context, String level){
         this.board = board;
+        this.context = context;
         this.boardView = createBoardView(context);
+        this.mTime = 0;
+        this.level = level;
+
+        this.mTimerTextView = (TextView) ((Activity) context).findViewById(R.id.timer_text_view);
+
+
+        this.countDownTimer = new CountDownTimer(TIMER_LENGTH, 1000) {
+            @Override
+            public void onTick(long l) {
+                mTime +=1;
+                mTimerTextView.setText(Integer.toString(mTime));
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        countDownTimer.cancel();
+        countDownTimer.start();
     }
 
     public Board getBoard(){
         return this.board;
+    }
+
+    public int getBombs() {
+        return this.board.getBombs();
     }
 
     public ImageView getParticularImageView(int row, int col){
@@ -91,10 +128,23 @@ public class BoardView {
                 }
             }
         }
+
+        // Save score
+        String seconds = mTimerTextView.getText().toString();
+
+        // Création d'un scoreManager
+        File directory = context.getFilesDir();
+        String fileName = this.level + "_scores.txt";
+        File scoreFile = new File(directory, fileName);
+        ScoreManager scoreManager = new ScoreManager(scoreFile);
+
+        // Enregistrement du temps courant
+        scoreManager.saveScore(seconds);
+
         return true;
     }
 
-    private void bombClick(Cell[][] board, ImageView[][] boardViews, int row, int col) {
+    private void endGameClick(Cell[][] board, ImageView[][] boardViews) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j].getValeur() == 9) {
@@ -111,6 +161,8 @@ public class BoardView {
                 board[i][j].setRevelee(true);
             }
         }
+
+        countDownTimer.cancel();
     }
 
 
@@ -141,7 +193,7 @@ public class BoardView {
                         }
 
                         if (cell.getValeur() == 9){
-                            bombClick(tableau.getCellules(), boardViews, ligne, colonne);
+                            endGameClick(tableau.getCellules(), boardViews);
                             Toast.makeText(context, "Perdu", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -152,6 +204,7 @@ public class BoardView {
                         if (checkWin(tableau.getCellules())) {
                             //Intent intent = new Intent(context, WinActivity.class);
                             //context.startActivity(intent);
+                            endGameClick(tableau.getCellules(), boardViews);
                             Toast.makeText(context, "Gagné", Toast.LENGTH_SHORT).show();
                         }
 

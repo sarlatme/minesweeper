@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Classement"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/easy_classement_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facile"/>
+
+        <Button
+            android:id="@+id/medium_classement_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moyen"/>
+
+        <Button
+            android:id="@+id/hard_classement_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Difficile"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/retMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu"/>
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/linear_layout_scores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            />
+    </ScrollView>
+
+
+</LinearLayout>
