@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 public class GameFragment extends Fragment {
     private Game game;
 
+    private int row, col, bombs;
     public GameFragment() {
     }
 
@@ -21,7 +22,14 @@ public class GameFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game_fragment, container, false);
 
-        game = new Game(getContext(),3, 3, 10);
+        Bundle args = getArguments();
+        if(args != null){
+            row = args.getInt("row");
+            col = args.getInt("col");
+            bombs = args.getInt("bombs");
+        }
+
+        game = new Game(getContext(),row, col, bombs);
 
         displayBoardView(view);
 
@@ -34,8 +42,8 @@ public class GameFragment extends Fragment {
         LinearLayout boardContainer = view.findViewById(R.id.board_container);
 
         // Add the ImageViews to the container
-        int imageWidth = 30;
-        int imageHeight = 30;
+        int imageWidth = 100;
+        int imageHeight = 100;
         for (int i = 0; i < game.getBoardView().getBoard().getRows(); i++) {
             LinearLayout rowLayout = new LinearLayout(getContext());
             rowLayout.setLayoutParams(new LinearLayout.LayoutParams(
@@ -44,6 +52,7 @@ public class GameFragment extends Fragment {
             rowLayout.setOrientation(LinearLayout.HORIZONTAL);
             for (int j = 0; j < game.getBoardView().getBoard().getCols(); j++) {
                 ImageView imageView = game.getBoardView().getParticularImageView(i, j);
+                imageView.setImageResource(R.drawable.empty_case);
                 imageView.setLayoutParams(new LinearLayout.LayoutParams(
                         imageWidth,
                         imageHeight));
