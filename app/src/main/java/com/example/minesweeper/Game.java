@@ -17,4 +17,8 @@ public class Game {
         return this.boardViews;
     }
 
+    public int getBombs(){
+        return this.boardViews.getBombs();
+    }
+
 }

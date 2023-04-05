@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class GameFragment extends Fragment {
     private Game game;
@@ -29,17 +30,20 @@ public class GameFragment extends Fragment {
             bombs = args.getInt("bombs");
         }
 
-        game = new Game(getContext(),row, col, bombs);
+        this.game = new Game(getContext(),row, col, bombs);
 
         displayBoardView(view);
 
         return view;
     }
 
-
     private void displayBoardView(View view) {
         // Get the container for the board view
         LinearLayout boardContainer = view.findViewById(R.id.board_container);
+
+        TextView flag_remaining = view.findViewById(R.id.flag_remaining);
+        int flags = this.game.getBombs();
+        flag_remaining.setText("Bombes à trouver : " + flags);
 
         // Add the ImageViews to the container
         int imageWidth = 100;
@@ -56,6 +60,7 @@ public class GameFragment extends Fragment {
                 imageView.setLayoutParams(new LinearLayout.LayoutParams(
                         imageWidth,
                         imageHeight));
+
                 rowLayout.addView(imageView);
             }
             boardContainer.addView(rowLayout);

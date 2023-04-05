@@ -1,5 +1,6 @@
 package com.example.minesweeper;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Gravity;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class BoardView {
@@ -113,6 +115,9 @@ public class BoardView {
         }
     }
 
+    public int getBombs() {
+        return this.board.getBombs();
+    }
 
     public ImageView[][] createBoardView(Context context) {
         int num_rows = this.board.getRows();
@@ -129,6 +134,8 @@ public class BoardView {
                 Cell cell = this.board.getParticularCell(ligne, colonne);
                 int value = cell.getValeur();
                 Board tableau = this.board;
+
+                int num_bombs = this.board.getBombs();
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -171,8 +178,8 @@ public class BoardView {
                         } else{
                             cell.setFlag(false);
                             ((ImageView) v).setImageResource(R.drawable.empty_case);
-                        }
 
+                        }
                         return true;
                     }
                 });
