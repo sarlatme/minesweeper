@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/board_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
+
+    <ImageView
+        android:id="@+id/image_view"
+        app:srcCompat="@drawable/mine_sweeper_img_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        tools:ignore="ContentDescription"/>
+
+    <LinearLayout
+        android:id="@+id/stat_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintHeight_percent="0.66"
+        app:layout_constraintTop_toBottomOf="@id/image_view"
+        android:gravity="center_horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Statistiques"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/nb_games_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parties jouées"
+            android:textSize="18sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/easy_wins_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Victoires Facile"
+            android:textSize="18sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/medium_wins_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Victoires Moyen"
+            android:textSize="18sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/hard_wins_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Victoires Difficile"
+            android:textSize="18sp"
+            android:textColor="@android:color/darker_gray"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/button_layout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintTop_toBottomOf="@id/stat_layout"
+        android:weightSum="3"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <Button
+            android:id="@+id/retMenuStats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:text="Menu"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"/>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
